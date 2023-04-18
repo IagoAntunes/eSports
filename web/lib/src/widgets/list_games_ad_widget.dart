@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/colors/app_colors.dart';
+
 class ListGamesAdWidget extends StatelessWidget {
   const ListGamesAdWidget({
     Key? key,
@@ -26,7 +28,7 @@ class ListGamesAdWidget extends StatelessWidget {
                 return const LinearGradient(
                   begin: Alignment.center,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.black, Colors.transparent],
+                  colors: [AppColors.black, AppColors.transparent],
                 ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
               },
               blendMode: BlendMode.dstIn,
@@ -55,7 +57,7 @@ class ListGamesAdWidget extends StatelessWidget {
                       "League of Legends",
                       style: GoogleFonts.inter(
                         fontSize: 12,
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

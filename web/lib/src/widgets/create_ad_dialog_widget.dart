@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web/core/colors/app_colors.dart';
+import 'package:web/core/typography/typography_font.dart';
 
 class CreateAdDialogWidget extends StatelessWidget {
   const CreateAdDialogWidget({
@@ -20,13 +22,13 @@ class CreateAdDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       content: Container(
         padding: const EdgeInsets.all(30),
         width: size.width * 0.4,
         height: size.height * 0.7,
         decoration: const BoxDecoration(
-          color: Color(0xff2A2634),
+          color: AppColors.greyMed,
           borderRadius: BorderRadius.all(
             Radius.circular(15),
           ),
@@ -36,39 +38,31 @@ class CreateAdDialogWidget extends StatelessWidget {
           children: [
             Text(
               "Publique seu anuncio",
-              style: GoogleFonts.inter(
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
+              style: AppTypography.mediumText(),
             ),
             const SizedBox(height: 30),
             Text(
               'Qual o game?',
-              style: GoogleFonts.inter(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTypography.mediumText(),
             ),
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                color: const Color(0xff18181B),
+                color: AppColors.greyDark,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: const Color(0xff18181B),
+                  color: AppColors.greyDark,
                 ),
               ),
               child: DropdownButton<String>(
-                dropdownColor: const Color(0xff18181B),
+                dropdownColor: AppColors.greyDark,
                 isExpanded: true,
                 underline: Container(),
                 value: '1',
                 style: GoogleFonts.inter(
                   fontSize: 14,
-                  color: const Color(0xff71717A),
+                  color: AppColors.greyText2,
                 ),
                 icon: Transform.scale(
                     scale: 1.5,
@@ -87,35 +81,28 @@ class CreateAdDialogWidget extends StatelessWidget {
             const SizedBox(height: 30),
             Text(
               'Seu nome (ou nickname)',
-              style: GoogleFonts.inter(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTypography.mediumText(),
             ),
             const SizedBox(height: 5),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                color: const Color(0xff18181B),
+                color: AppColors.greyDark,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: const Color(0xff18181B),
+                  color: AppColors.greyDark,
                 ),
               ),
               child: TextField(
                 controller: nickcontroller,
                 style: GoogleFonts.inter(
-                  color: Colors.white,
+                  color: AppColors.white,
                   fontSize: 14,
                 ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Como te chamam dentro do game',
-                  hintStyle: GoogleFonts.inter(
-                    color: const Color(0xff71717A),
-                    fontSize: 12,
-                  ),
+                  hintStyle: AppTypography.textFieldStyle(),
                 ),
               ),
             ),
@@ -129,35 +116,28 @@ class CreateAdDialogWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Joga a quantos anos',
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         decoration: BoxDecoration(
-                          color: const Color(0xff18181B),
+                          color: AppColors.greyDark,
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
-                            color: const Color(0xff18181B),
+                            color: AppColors.greyDark,
                           ),
                         ),
                         child: TextField(
                           controller: yearsplaycontroller,
                           style: GoogleFonts.inter(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontSize: 14,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Tudo bem ser ZERO',
-                            hintStyle: GoogleFonts.inter(
-                              color: const Color(0xff71717A),
-                              fontSize: 12,
-                            ),
+                            hintStyle: AppTypography.textFieldStyle(),
                           ),
                         ),
                       ),
@@ -171,35 +151,28 @@ class CreateAdDialogWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Qual seu Discord?',
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         decoration: BoxDecoration(
-                          color: const Color(0xff18181B),
+                          color: AppColors.greyDark,
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
-                            color: const Color(0xff18181B),
+                            color: AppColors.greyDark,
                           ),
                         ),
                         child: TextField(
                           controller: discordcontroller,
                           style: GoogleFonts.inter(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontSize: 14,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Usuario#0000',
-                            hintStyle: GoogleFonts.inter(
-                              color: const Color(0xff71717A),
-                              fontSize: 12,
-                            ),
+                            hintStyle: AppTypography.textFieldStyle(),
                           ),
                         ),
                       ),
@@ -218,11 +191,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Quando costuma jogar',
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
                       Row(
@@ -233,9 +202,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                               8,
                             ),
                             decoration: const BoxDecoration(
-                              color: Color(
-                                0xff18181B,
-                              ),
+                              color: AppColors.greyDark,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   6,
@@ -245,7 +212,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                             child: Text(
                               "S",
                               style: GoogleFonts.inter(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -254,9 +221,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                               8,
                             ),
                             decoration: const BoxDecoration(
-                              color: Color(
-                                0xff18181B,
-                              ),
+                              color: AppColors.greyDark,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   6,
@@ -266,7 +231,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                             child: Text(
                               "S",
                               style: GoogleFonts.inter(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -275,9 +240,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                               8,
                             ),
                             decoration: const BoxDecoration(
-                              color: Color(
-                                0xff18181B,
-                              ),
+                              color: AppColors.greyDark,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   6,
@@ -287,7 +250,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                             child: Text(
                               "S",
                               style: GoogleFonts.inter(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -296,9 +259,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                               8,
                             ),
                             decoration: const BoxDecoration(
-                              color: Color(
-                                0xff18181B,
-                              ),
+                              color: AppColors.greyDark,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   6,
@@ -308,7 +269,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                             child: Text(
                               "S",
                               style: GoogleFonts.inter(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -317,9 +278,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                               8,
                             ),
                             decoration: const BoxDecoration(
-                              color: Color(
-                                0xff18181B,
-                              ),
+                              color: AppColors.greyDark,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   6,
@@ -329,7 +288,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                             child: Text(
                               "S",
                               style: GoogleFonts.inter(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -345,11 +304,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Qual horario do dia?',
-                        style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
                       Container(
@@ -357,26 +312,21 @@ class CreateAdDialogWidget extends StatelessWidget {
                           horizontal: 5,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xff18181B),
+                          color: AppColors.greyDark,
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
-                            color: const Color(
-                              0xff18181B,
-                            ),
+                            color: AppColors.greyDark,
                           ),
                         ),
                         child: TextField(
                           controller: discordcontroller,
                           style: GoogleFonts.inter(
-                            color: Colors.white,
+                            color: AppColors.white,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Usuario#0000',
-                            hintStyle: GoogleFonts.inter(
-                              color: const Color(0xff71717A),
-                              fontSize: 12,
-                            ),
+                            hintStyle: AppTypography.textFieldStyle(),
                           ),
                         ),
                       ),
@@ -389,15 +339,15 @@ class CreateAdDialogWidget extends StatelessWidget {
               children: [
                 Checkbox(
                   value: true,
-                  activeColor: const Color(0xff18181B),
-                  checkColor: Colors.green,
+                  activeColor: AppColors.greyDark,
+                  checkColor: AppColors.green,
                   onChanged: (value) {},
                 ),
                 const SizedBox(width: 10),
                 Text(
                   "Costumo me conectar ao chat de voz",
                   style: GoogleFonts.inter(
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
               ],
@@ -411,13 +361,13 @@ class CreateAdDialogWidget extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff71717A),
+                    backgroundColor: AppColors.greyText2,
                     padding: const EdgeInsets.all(20),
                   ),
                   child: Text(
                     "Cancelar",
                     style: GoogleFonts.inter(
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
                   ),
                 ),
@@ -425,19 +375,19 @@ class CreateAdDialogWidget extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff8B5CF6),
+                    backgroundColor: AppColors.purple,
                     padding: const EdgeInsets.all(17),
                   ),
                   child: Row(
                     children: [
                       const Icon(
                         Icons.games_outlined,
-                        color: Colors.white,
+                        color: AppColors.white,
                       ),
                       Text(
                         "Encontrar Duo",
                         style: GoogleFonts.inter(
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                       ),
                     ],

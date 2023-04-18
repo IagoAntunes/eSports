@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web/core/colors/app_colors.dart';
+import 'package:web/core/typography/typography_font.dart';
 
 import '../../core/widgets/gradient_text.dart';
 
@@ -15,31 +17,20 @@ class TitleHomeWidget extends StatelessWidget {
       children: [
         Text(
           "Seu",
-          style: GoogleFonts.inter(
-            fontSize: 64,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTypography.titleStyle(),
         ),
         GradientText(
           ' duo ',
-          style: GoogleFonts.inter(
-            fontSize: 64,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTypography.titleStyle(),
           gradient: const LinearGradient(colors: [
-            Color(0XFF9572FC),
-            Color(0xff43E7AD),
-            Color(0xffE1D55D),
+            AppColors.purpleGradient1,
+            AppColors.greenGradient1,
+            AppColors.yellowGradient1,
           ]),
         ),
         Text(
           "está aqui",
-          style: GoogleFonts.inter(
-            fontSize: 64,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTypography.titleStyle(),
         ),
       ],
     );

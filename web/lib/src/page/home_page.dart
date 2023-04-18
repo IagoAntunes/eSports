@@ -5,7 +5,7 @@ import '../widgets/list_games_ad_widget.dart';
 import '../widgets/title_home_widget.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      scrollBehavior: MaterialScrollBehavior().copyWith(
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.mouse,
           PointerDeviceKind.touch,
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           PointerDeviceKind.unknown
         },
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web/core/colors/app_colors.dart';
 
 import 'create_ad_dialog_widget.dart';
 
@@ -21,16 +22,16 @@ class CardInfoWidget extends StatelessWidget {
           height: 10,
           width: size.width / 1.5,
           decoration: const BoxDecoration(
-            color: Colors.red,
+            color: AppColors.red,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(5),
               topRight: Radius.circular(5),
             ),
             gradient: LinearGradient(
               colors: [
-                Color(0xff9572FC),
-                Color(0xff43E7AD),
-                Color(0xffE2D45C),
+                AppColors.purpleGradient1,
+                AppColors.greenGradient1,
+                AppColors.yellowGradient1,
               ],
             ),
           ),
@@ -41,7 +42,7 @@ class CardInfoWidget extends StatelessWidget {
             padding: const EdgeInsets.all(25),
             width: size.width / 1.5,
             decoration: const BoxDecoration(
-              color: Color(0xff2A2634),
+              color: AppColors.greyMed,
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
@@ -53,7 +54,7 @@ class CardInfoWidget extends StatelessWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(14),
-                      backgroundColor: const Color(0xff8B5CF6),
+                      backgroundColor: AppColors.purple,
                     ),
                     onPressed: () {
                       TextEditingController nickcontroller =
@@ -88,7 +89,7 @@ class CardInfoWidget extends StatelessWidget {
                       "Não encontrou seu duo ?",
                       style: GoogleFonts.inter(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -96,7 +97,7 @@ class CardInfoWidget extends StatelessWidget {
                       "Publique um anúncio para encontrar novos players!",
                       style: GoogleFonts.inter(
                         fontSize: 14,
-                        color: const Color(0xffA1A1AA),
+                        color: AppColors.greyText,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
