@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:web/core/colors/app_colors.dart';
 import 'package:web/core/typography/typography_font.dart';
 
-class CreateAdDialogWidget extends StatelessWidget {
+class CreateAdDialogWidget extends StatefulWidget {
   const CreateAdDialogWidget({
     Key? key,
     required this.size,
@@ -20,13 +20,23 @@ class CreateAdDialogWidget extends StatelessWidget {
   final TextEditingController discordcontroller;
 
   @override
+  State<CreateAdDialogWidget> createState() => _CreateAdDialogWidgetState();
+}
+
+class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
+  int? hourDay;
+  int? minutesDay;
+  bool isChecked = false;
+  List<int> daysSelected = [];
+
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppColors.transparent,
       content: Container(
         padding: const EdgeInsets.all(30),
-        width: size.width * 0.4,
-        height: size.height * 0.7,
+        width: widget.size.width * 0.4,
+        height: widget.size.height * 0.7,
         decoration: const BoxDecoration(
           color: AppColors.greyMed,
           borderRadius: BorderRadius.all(
@@ -75,7 +85,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                 ),
                 elevation: 16,
                 onChanged: (value) {},
-                items: listItems,
+                items: widget.listItems,
               ),
             ),
             const SizedBox(height: 30),
@@ -94,7 +104,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                 ),
               ),
               child: TextField(
-                controller: nickcontroller,
+                controller: widget.nickcontroller,
                 style: GoogleFonts.inter(
                   color: AppColors.white,
                   fontSize: 14,
@@ -129,7 +139,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                           ),
                         ),
                         child: TextField(
-                          controller: yearsplaycontroller,
+                          controller: widget.yearsplaycontroller,
                           style: GoogleFonts.inter(
                             color: AppColors.white,
                             fontSize: 14,
@@ -164,7 +174,7 @@ class CreateAdDialogWidget extends StatelessWidget {
                           ),
                         ),
                         child: TextField(
-                          controller: discordcontroller,
+                          controller: widget.discordcontroller,
                           style: GoogleFonts.inter(
                             color: AppColors.white,
                             fontSize: 14,
@@ -197,98 +207,173 @@ class CreateAdDialogWidget extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(
-                              8,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.greyDark,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  6,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (daysSelected.contains(0)) {
+                                  daysSelected.remove(0);
+                                } else {
+                                  daysSelected.add(0);
+                                }
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(
+                                8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: daysSelected
+                                        .where((element) => element == 0)
+                                        .isEmpty
+                                    ? AppColors.greyDark
+                                    : AppColors.purple,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    6,
+                                  ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              "S",
-                              style: GoogleFonts.inter(
-                                color: AppColors.white,
+                              child: Text(
+                                "T",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(
-                              8,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.greyDark,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  6,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (daysSelected.contains(1)) {
+                                  daysSelected.remove(1);
+                                } else {
+                                  daysSelected.add(1);
+                                }
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(
+                                8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: daysSelected
+                                        .where((element) => element == 1)
+                                        .isEmpty
+                                    ? AppColors.greyDark
+                                    : AppColors.purple,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    6,
+                                  ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              "S",
-                              style: GoogleFonts.inter(
-                                color: AppColors.white,
+                              child: Text(
+                                "T",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(
-                              8,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.greyDark,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  6,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (daysSelected.contains(2)) {
+                                  daysSelected.remove(2);
+                                } else {
+                                  daysSelected.add(2);
+                                }
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(
+                                8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: daysSelected
+                                        .where((element) => element == 2)
+                                        .isEmpty
+                                    ? AppColors.greyDark
+                                    : AppColors.purple,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    6,
+                                  ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              "S",
-                              style: GoogleFonts.inter(
-                                color: AppColors.white,
+                              child: Text(
+                                "T",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(
-                              8,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.greyDark,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  6,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (daysSelected.contains(3)) {
+                                  daysSelected.remove(3);
+                                } else {
+                                  daysSelected.add(3);
+                                }
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(
+                                8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: daysSelected
+                                        .where((element) => element == 3)
+                                        .isEmpty
+                                    ? AppColors.greyDark
+                                    : AppColors.purple,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    6,
+                                  ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              "S",
-                              style: GoogleFonts.inter(
-                                color: AppColors.white,
+                              child: Text(
+                                "T",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(
-                              8,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.greyDark,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  6,
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (daysSelected.contains(4)) {
+                                  daysSelected.remove(4);
+                                } else {
+                                  daysSelected.add(4);
+                                }
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(
+                                8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: daysSelected
+                                        .where((element) => element == 4)
+                                        .isEmpty
+                                    ? AppColors.greyDark
+                                    : AppColors.purple,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    6,
+                                  ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              "S",
-                              style: GoogleFonts.inter(
-                                color: AppColors.white,
+                              child: Text(
+                                "T",
+                                style: GoogleFonts.inter(
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -307,41 +392,94 @@ class CreateAdDialogWidget extends StatelessWidget {
                         style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.greyDark,
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: AppColors.greyDark,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () async {
+                                TimeOfDay? pickedTime = await showTimePicker(
+                                  context: context,
+                                  initialTime:
+                                      const TimeOfDay(hour: 7, minute: 0),
+                                );
+                                if (pickedTime != null) {
+                                  setState(() {
+                                    hourDay = pickedTime.hour;
+                                  });
+                                }
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: AppColors.greyDark,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                    color: AppColors.greyDark,
+                                  ),
+                                ),
+                                child: Text(
+                                  hourDay == null ? "De" : hourDay!.toString(),
+                                  style: GoogleFonts.inter(
+                                    color: AppColors.greyText,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: TextField(
-                          controller: discordcontroller,
-                          style: GoogleFonts.inter(
-                            color: AppColors.white,
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () async {
+                                TimeOfDay? pickedTime = await showTimePicker(
+                                  context: context,
+                                  initialTime:
+                                      const TimeOfDay(hour: 7, minute: 0),
+                                );
+                                if (pickedTime != null) {
+                                  setState(() {
+                                    minutesDay = pickedTime.minute;
+                                  });
+                                }
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: AppColors.greyDark,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                    color: AppColors.greyDark,
+                                  ),
+                                ),
+                                child: Text(
+                                  minutesDay == null
+                                      ? "Ate"
+                                      : minutesDay.toString(),
+                                  style: GoogleFonts.inter(
+                                    color: AppColors.greyText,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Usuario#0000',
-                            hintStyle: AppTypography.textFieldStyle(),
-                          ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 15),
             Row(
               children: [
                 Checkbox(
-                  value: true,
+                  value: isChecked,
                   activeColor: AppColors.greyDark,
                   checkColor: AppColors.green,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      isChecked = !isChecked;
+                    });
+                  },
                 ),
                 const SizedBox(width: 10),
                 Text(

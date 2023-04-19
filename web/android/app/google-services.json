@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "382121001917",
+    "project_id": "esports-98e21",
+    "storage_bucket": "esports-98e21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382121001917:android:9ca7b2d9fd95fb194948d4",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382121001917-j9ikpjglpli565a1begsg5pp89eif3m8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQl-_b9wTpn1PO7M5SG78HllUB7Y6DJWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382121001917-j9ikpjglpli565a1begsg5pp89eif3m8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382121001917:android:055d98524055ecf74948d4",
+        "android_client_info": {
+          "package_name": "com.example.web"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382121001917-j9ikpjglpli565a1begsg5pp89eif3m8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQl-_b9wTpn1PO7M5SG78HllUB7Y6DJWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382121001917-j9ikpjglpli565a1begsg5pp89eif3m8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
