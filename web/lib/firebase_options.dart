@@ -21,11 +21,20 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -44,39 +53,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDcLsZtE58mrFGBy82XSFNyPDr86EE2FE8',
-    appId: '1:382121001917:web:3197e408a93298534948d4',
-    messagingSenderId: '382121001917',
-    projectId: 'esports-98e21',
-    authDomain: 'esports-98e21.firebaseapp.com',
-    storageBucket: 'esports-98e21.appspot.com',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDQl-_b9wTpn1PO7M5SG78HllUB7Y6DJWo',
-    appId: '1:382121001917:android:055d98524055ecf74948d4',
-    messagingSenderId: '382121001917',
-    projectId: 'esports-98e21',
-    storageBucket: 'esports-98e21.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA3SydIe-_hCO18HNUib0BoKP3EjZCFEIg',
-    appId: '1:382121001917:ios:223021328f9f44004948d4',
-    messagingSenderId: '382121001917',
-    projectId: 'esports-98e21',
-    storageBucket: 'esports-98e21.appspot.com',
-    iosClientId: '382121001917-ibhfmd2f8j98d29s1rgn6q50ii9odgqu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.web',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA3SydIe-_hCO18HNUib0BoKP3EjZCFEIg',
-    appId: '1:382121001917:ios:223021328f9f44004948d4',
-    messagingSenderId: '382121001917',
-    projectId: 'esports-98e21',
-    storageBucket: 'esports-98e21.appspot.com',
-    iosClientId: '382121001917-ibhfmd2f8j98d29s1rgn6q50ii9odgqu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.web',
+    apiKey: 'AIzaSyDOrmW2UYNXQDLBskM2m15rLDiE2thE3Ys',
+    appId: '1:1054526824476:web:623c9b5976ef6e9cb5bfd9',
+    messagingSenderId: '1054526824476',
+    projectId: 'esports-7e690',
+    authDomain: 'esports-7e690.firebaseapp.com',
+    storageBucket: 'esports-7e690.appspot.com',
   );
 }

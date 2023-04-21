@@ -1,33 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uuid/uuid.dart';
 import 'package:web/core/colors/app_colors.dart';
 import 'package:web/core/typography/typography_font.dart';
+
+import '../models/announcement_model.dart';
 
 class CreateAdDialogWidget extends StatefulWidget {
   const CreateAdDialogWidget({
     Key? key,
     required this.size,
     required this.listItems,
-    required this.nickcontroller,
-    required this.yearsplaycontroller,
-    required this.discordcontroller,
   }) : super(key: key);
 
   final Size size;
   final List<DropdownMenuItem<String>> listItems;
-  final TextEditingController nickcontroller;
-  final TextEditingController yearsplaycontroller;
-  final TextEditingController discordcontroller;
 
   @override
   State<CreateAdDialogWidget> createState() => _CreateAdDialogWidgetState();
 }
 
 class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
+  final TextEditingController nickcontroller = TextEditingController();
+  final TextEditingController yearsplaycontroller = TextEditingController();
+  final TextEditingController discordcontroller = TextEditingController();
+
   int? hourDay;
   int? minutesDay;
   bool isChecked = false;
   List<int> daysSelected = [];
+  String currentValue = "League of Legends";
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +74,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 dropdownColor: AppColors.greyDark,
                 isExpanded: true,
                 underline: Container(),
-                value: '1',
+                value: currentValue,
                 style: GoogleFonts.inter(
                   fontSize: 14,
                   color: AppColors.greyText2,
@@ -84,7 +89,13 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                   ),
                 ),
                 elevation: 16,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() {
+                      currentValue = value;
+                    });
+                  }
+                },
                 items: widget.listItems,
               ),
             ),
@@ -104,7 +115,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 ),
               ),
               child: TextField(
-                controller: widget.nickcontroller,
+                controller: nickcontroller,
                 style: GoogleFonts.inter(
                   color: AppColors.white,
                   fontSize: 14,
@@ -139,7 +150,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                           ),
                         ),
                         child: TextField(
-                          controller: widget.yearsplaycontroller,
+                          controller: yearsplaycontroller,
                           style: GoogleFonts.inter(
                             color: AppColors.white,
                             fontSize: 14,
@@ -174,7 +185,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                           ),
                         ),
                         child: TextField(
-                          controller: widget.discordcontroller,
+                          controller: discordcontroller,
                           style: GoogleFonts.inter(
                             color: AppColors.white,
                             fontSize: 14,
@@ -511,7 +522,29 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 ),
                 const SizedBox(width: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    AnnouncementModel announcement = AnnouncementModel(
+                      id: Uuid().v1(),
+                      nameGame: widget.listItems
+                          .where((element) => element.value == currentValue)
+                          .first
+                          .value
+                          .toString(),
+                      nickname: nickcontroller.text,
+                      yearsPlayed: yearsplaycontroller.text,
+                      idDiscord: discordcontroller.text,
+                      daysPlayed: daysSelected,
+                      hourDay: TimeOfDay(hour: hourDay!, minute: minutesDay!),
+                      hasVoiceChat: isChecked,
+                    );
+
+                    await firestore
+                        .collection('announcements')
+                        .doc(announcement.id)
+                        .set(announcement.toJson());
+
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.purple,
                     padding: const EdgeInsets.all(17),

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:web/src/models/announcement_model.dart';
 
 import '../models/game_model.dart';
 import '../widgets/card_info_widget.dart';
@@ -14,12 +17,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<DropdownMenuItem<String>> listItems = [];
   List<GameModel> listGames = [];
+  List<AnnouncementModel> listAnnouncements = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  late StreamSubscription listener;
   @override
   void initState() {
     super.initState();
+    _getGames();
+    addListeners();
   }
 
   _getGames() async {
@@ -29,6 +35,23 @@ class _HomePageState extends State<HomePage> {
     for (var game in snapshot.docs) {
       listGames.add(GameModel.fromMap(game.data()));
     }
+  }
+
+  void addListeners() async {
+    listener =
+        firestore.collection('announcements').snapshots().listen((snapshot) {
+      getAll();
+    });
+  }
+
+  getAll() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await firestore.collection('announcements').get();
+
+    for (var game in snapshot.docs) {
+      listAnnouncements.add(AnnouncementModel.fromJson(game.data()));
+    }
+    setState(() {});
   }
 
   @override
@@ -53,9 +76,13 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 50),
                 const TitleHomeWidget(),
                 const SizedBox(height: 30),
-                ListGamesAdWidget(size: size),
+                ListGamesAdWidget(
+                  size: size,
+                  listAnnouncements: listAnnouncements,
+                  listGames: listGames,
+                ),
                 SizedBox(height: size.height * 0.05),
-                CardInfoWidget(size: size, listItems: listItems)
+                CardInfoWidget(size: size, listGames: listGames)
               ],
             ),
           ),

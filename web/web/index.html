@@ -53,6 +53,29 @@
         return appRunner.runApp();
       });
     });
+    
+  </script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+    import firebase from "firebase/compat/app";
+    import "firebase/compat/auth";
+    import "firebase/compat/firestore";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOrmW2UYNXQDLBskM2m15rLDiE2thE3Ys",
+      authDomain: "esports-7e690.firebaseapp.com",
+      projectId: "esports-7e690",
+      storageBucket: "esports-7e690.appspot.com",
+      messagingSenderId: "1054526824476",
+      appId: "1:1054526824476:web:623c9b5976ef6e9cb5bfd9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
   </script>
 </body>
 </html>

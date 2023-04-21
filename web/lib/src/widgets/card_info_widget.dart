@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:web/core/colors/app_colors.dart';
 
+import '../models/game_model.dart';
 import 'create_ad_dialog_widget.dart';
 
 class CardInfoWidget extends StatelessWidget {
-  const CardInfoWidget({
+  CardInfoWidget({
     Key? key,
     required this.size,
-    required this.listItems,
+    required this.listGames,
   }) : super(key: key);
 
   final Size size;
-  final List<DropdownMenuItem<String>> listItems;
+  final List<DropdownMenuItem<String>> listItems = [];
+  final List<GameModel> listGames;
 
   @override
   Widget build(BuildContext context) {
@@ -57,20 +59,20 @@ class CardInfoWidget extends StatelessWidget {
                       backgroundColor: AppColors.purple,
                     ),
                     onPressed: () {
-                      TextEditingController nickcontroller =
-                          TextEditingController();
-                      TextEditingController yearsplaycontroller =
-                          TextEditingController();
-                      TextEditingController discordcontroller =
-                          TextEditingController();
                       showDialog(
                         context: context,
                         builder: (context) => CreateAdDialogWidget(
                           size: size,
-                          listItems: listItems,
-                          nickcontroller: nickcontroller,
-                          yearsplaycontroller: yearsplaycontroller,
-                          discordcontroller: discordcontroller,
+                          listItems: listGames
+                              .map(
+                                (e) => DropdownMenuItem<String>(
+                                  value: e.name.toString(),
+                                  child: Text(
+                                    e.name.toString(),
+                                  ),
+                                ),
+                              )
+                              .toList(),
                         ),
                       );
                     },

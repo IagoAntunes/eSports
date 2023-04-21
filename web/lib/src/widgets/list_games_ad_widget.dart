@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web/src/models/announcement_model.dart';
+import 'package:web/src/models/game_model.dart';
 
 import '../../core/colors/app_colors.dart';
 
@@ -7,12 +9,30 @@ class ListGamesAdWidget extends StatelessWidget {
   const ListGamesAdWidget({
     Key? key,
     required this.size,
+    required this.listAnnouncements,
+    required this.listGames,
   }) : super(key: key);
 
   final Size size;
+  final List<AnnouncementModel> listAnnouncements;
+  final List<GameModel> listGames;
+
+  String _getImage(int index) {
+    return listGames
+        .where((element) => element.name == listAnnouncements[index].nameGame)
+        .first
+        .pathImage;
+  }
+
+  _numAnnouncements(int index) {
+    return listGames
+        .where((element) => element.name == listAnnouncements[index].nameGame)
+        .length;
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(listAnnouncements);
     return SizedBox(
       height: size.height * 0.25,
       width: size.width / 1.5,
@@ -20,7 +40,7 @@ class ListGamesAdWidget extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(width: 15),
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: listAnnouncements.length,
         itemBuilder: (context, index) => Stack(
           children: [
             ShaderMask(
@@ -32,8 +52,8 @@ class ListGamesAdWidget extends StatelessWidget {
                 ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
               },
               blendMode: BlendMode.dstIn,
-              child: Image.asset(
-                'assets/images/lol.png',
+              child: Image.network(
+                _getImage(index),
                 height: 400,
                 fit: BoxFit.cover,
               ),
@@ -54,7 +74,7 @@ class ListGamesAdWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      "League of Legends",
+                      listAnnouncements[index].nameGame,
                       style: GoogleFonts.inter(
                         fontSize: 12,
                         color: AppColors.white,
@@ -62,7 +82,7 @@ class ListGamesAdWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "4 anuncios",
+                      "${_numAnnouncements(index)} anuncio(s)",
                       style: GoogleFonts.inter(
                         fontSize: 10,
                         color: Colors.grey,

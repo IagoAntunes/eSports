@@ -1,8 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:web/src/page/home_page.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -29,3 +36,19 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// import { initializeApp } from "firebase/app";
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDcLsZtE58mrFGBy82XSFNyPDr86EE2FE8",
+//   authDomain: "esports-98e21.firebaseapp.com",
+//   projectId: "esports-98e21",
+//   storageBucket: "esports-98e21.appspot.com",
+//   messagingSenderId: "382121001917",
+//   appId: "1:382121001917:web:5b70fc4b30c3bc864948d4"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
