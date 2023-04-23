@@ -29,6 +29,8 @@
 - [x] View list adannouncements[WEB/MOBILE]
 - [x] View announcements details[MOBILE]
 - [x] Intuitive design
+- [X] MVC architecture
+- [ ] Internationalization
 
 ---
 
