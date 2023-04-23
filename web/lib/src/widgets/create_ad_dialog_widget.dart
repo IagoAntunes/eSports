@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web/core/colors/app_colors.dart';
 import 'package:web/core/typography/typography_font.dart';
@@ -26,7 +28,8 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
   final TextEditingController yearsplaycontroller = TextEditingController();
   final TextEditingController discordcontroller = TextEditingController();
 
-  int? hourDay;
+  String? startTime;
+  String? endTime;
   int? minutesDay;
   bool isChecked = false;
   List<int> daysSelected = [];
@@ -52,12 +55,12 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Publique seu anuncio",
+              "Post your announcement",
               style: AppTypography.mediumText(),
             ),
             const SizedBox(height: 30),
             Text(
-              'Qual o game?',
+              'What\'s the game?',
               style: AppTypography.mediumText(),
             ),
             const SizedBox(height: 10),
@@ -85,7 +88,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 hint: const Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Selecione uma área',
+                    'Select an area',
                   ),
                 ),
                 elevation: 16,
@@ -101,7 +104,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
             ),
             const SizedBox(height: 30),
             Text(
-              'Seu nome (ou nickname)',
+              'Your name (or nickname)',
               style: AppTypography.mediumText(),
             ),
             const SizedBox(height: 5),
@@ -122,7 +125,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 ),
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Como te chamam dentro do game',
+                  hintText: 'How do they call you in the game?',
                   hintStyle: AppTypography.textFieldStyle(),
                 ),
               ),
@@ -136,7 +139,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Joga a quantos anos',
+                        'Play for how many years',
                         style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
@@ -151,13 +154,17 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                         ),
                         child: TextField(
                           controller: yearsplaycontroller,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           style: GoogleFonts.inter(
                             color: AppColors.white,
                             fontSize: 14,
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Tudo bem ser ZERO',
+                            hintText: 'It\'s OK to be ZERO',
                             hintStyle: AppTypography.textFieldStyle(),
                           ),
                         ),
@@ -171,7 +178,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Qual seu Discord?',
+                        'What\'s your Discord?',
                         style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
@@ -211,7 +218,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Quando costuma jogar',
+                        'When do you usually play',
                         style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
@@ -245,7 +252,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                 ),
                               ),
                               child: Text(
-                                "T",
+                                "M",
                                 style: GoogleFonts.inter(
                                   color: AppColors.white,
                                 ),
@@ -313,7 +320,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                 ),
                               ),
                               child: Text(
-                                "T",
+                                "W",
                                 style: GoogleFonts.inter(
                                   color: AppColors.white,
                                 ),
@@ -381,7 +388,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                 ),
                               ),
                               child: Text(
-                                "T",
+                                "F",
                                 style: GoogleFonts.inter(
                                   color: AppColors.white,
                                 ),
@@ -399,7 +406,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Qual horario do dia?',
+                        'What time of day?',
                         style: AppTypography.mediumText(),
                       ),
                       const SizedBox(height: 5),
@@ -414,8 +421,15 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                       const TimeOfDay(hour: 7, minute: 0),
                                 );
                                 if (pickedTime != null) {
+                                  String formattedTime = DateFormat('HH:mm')
+                                      .format(DateTime(
+                                          DateTime.now().year,
+                                          DateTime.now().month,
+                                          DateTime.now().day,
+                                          pickedTime.hour,
+                                          pickedTime.minute));
                                   setState(() {
-                                    hourDay = pickedTime.hour;
+                                    startTime = formattedTime;
                                   });
                                 }
                               },
@@ -429,7 +443,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                   ),
                                 ),
                                 child: Text(
-                                  hourDay == null ? "De" : hourDay!.toString(),
+                                  startTime == null ? "De" : startTime!,
                                   style: GoogleFonts.inter(
                                     color: AppColors.greyText,
                                   ),
@@ -447,8 +461,15 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                       const TimeOfDay(hour: 7, minute: 0),
                                 );
                                 if (pickedTime != null) {
+                                  String formattedTime = DateFormat('HH:mm')
+                                      .format(DateTime(
+                                          DateTime.now().year,
+                                          DateTime.now().month,
+                                          DateTime.now().day,
+                                          pickedTime.hour,
+                                          pickedTime.minute));
                                   setState(() {
-                                    minutesDay = pickedTime.minute;
+                                    endTime = formattedTime;
                                   });
                                 }
                               },
@@ -462,9 +483,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                                   ),
                                 ),
                                 child: Text(
-                                  minutesDay == null
-                                      ? "Ate"
-                                      : minutesDay.toString(),
+                                  endTime == null ? "Ate" : endTime.toString(),
                                   style: GoogleFonts.inter(
                                     color: AppColors.greyText,
                                   ),
@@ -494,7 +513,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  "Costumo me conectar ao chat de voz",
+                  "I often connect to voice chat",
                   style: GoogleFonts.inter(
                     color: AppColors.white,
                   ),
@@ -514,7 +533,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                     padding: const EdgeInsets.all(20),
                   ),
                   child: Text(
-                    "Cancelar",
+                    "Cancel",
                     style: GoogleFonts.inter(
                       color: AppColors.white,
                     ),
@@ -523,27 +542,35 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                 const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () async {
-                    AnnouncementModel announcement = AnnouncementModel(
-                      id: Uuid().v1(),
-                      nameGame: widget.listItems
-                          .where((element) => element.value == currentValue)
-                          .first
-                          .value
-                          .toString(),
-                      nickname: nickcontroller.text,
-                      yearsPlayed: yearsplaycontroller.text,
-                      idDiscord: discordcontroller.text,
-                      daysPlayed: daysSelected,
-                      hourDay: TimeOfDay(hour: hourDay!, minute: minutesDay!),
-                      hasVoiceChat: isChecked,
-                    );
+                    if (nickcontroller.text.isNotEmpty &&
+                        yearsplaycontroller.text.isNotEmpty &&
+                        discordcontroller.text.isNotEmpty &&
+                        startTime != null &&
+                        endTime != null &&
+                        daysSelected.isNotEmpty) {
+                      AnnouncementModel announcement = AnnouncementModel(
+                        id: const Uuid().v1(),
+                        nameGame: widget.listItems
+                            .where((element) => element.value == currentValue)
+                            .first
+                            .value
+                            .toString(),
+                        nickname: nickcontroller.text,
+                        yearsPlayed: yearsplaycontroller.text,
+                        idDiscord: discordcontroller.text,
+                        startTime: startTime!,
+                        endTime: endTime!,
+                        daysPlayed: daysSelected,
+                        hasVoiceChat: isChecked,
+                      );
 
-                    await firestore
-                        .collection('announcements')
-                        .doc(announcement.id)
-                        .set(announcement.toJson());
+                      await firestore
+                          .collection('announcements')
+                          .doc(announcement.id)
+                          .set(announcement.toJson());
 
-                    Navigator.pop(context);
+                      Navigator.pop(context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.purple,
@@ -556,7 +583,7 @@ class _CreateAdDialogWidgetState extends State<CreateAdDialogWidget> {
                         color: AppColors.white,
                       ),
                       Text(
-                        "Encontrar Duo",
+                        "Find duo",
                         style: GoogleFonts.inter(
                           color: AppColors.white,
                         ),

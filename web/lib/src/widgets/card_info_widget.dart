@@ -79,7 +79,7 @@ class CardInfoWidget extends StatelessWidget {
                     child: Row(
                       children: const [
                         Icon(Icons.search),
-                        Text("Publicar anúncio"),
+                        Text("Post announcement"),
                       ],
                     ),
                   ),
@@ -88,7 +88,7 @@ class CardInfoWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Não encontrou seu duo ?",
+                      "Didn't find his duo?",
                       style: GoogleFonts.inter(
                         fontSize: 20,
                         color: AppColors.white,
@@ -96,7 +96,7 @@ class CardInfoWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Publique um anúncio para encontrar novos players!",
+                      "Post an ad to find new players!",
                       style: GoogleFonts.inter(
                         fontSize: 14,
                         color: AppColors.greyText,

@@ -1,4 +1,4 @@
-import 'package:esports_mobile/pages/splash_screen.dart';
+import 'package:esports_mobile/features/SplashScreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

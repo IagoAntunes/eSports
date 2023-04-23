@@ -5,42 +5,60 @@ import 'package:web/src/models/game_model.dart';
 
 import '../../core/colors/app_colors.dart';
 
-class ListGamesAdWidget extends StatelessWidget {
-  const ListGamesAdWidget({
+class ListGamesAdWidget extends StatefulWidget {
+  ListGamesAdWidget({
     Key? key,
     required this.size,
     required this.listAnnouncements,
     required this.listGames,
+    required this.listUnicAnnouncements,
   }) : super(key: key);
 
   final Size size;
   final List<AnnouncementModel> listAnnouncements;
+  final List<AnnouncementModel> listUnicAnnouncements;
   final List<GameModel> listGames;
 
+  @override
+  State<ListGamesAdWidget> createState() => _ListGamesAdWidgetState();
+}
+
+class _ListGamesAdWidgetState extends State<ListGamesAdWidget> {
+  final List<AnnouncementModel> listFilterAnnouncements = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   String _getImage(int index) {
-    return listGames
-        .where((element) => element.name == listAnnouncements[index].nameGame)
+    return widget.listGames
+        .where((element) =>
+            element.name == widget.listUnicAnnouncements[index].nameGame)
         .first
         .pathImage;
   }
 
-  _numAnnouncements(int index) {
-    return listGames
-        .where((element) => element.name == listAnnouncements[index].nameGame)
-        .length;
+  int _numAnnouncements(AnnouncementModel announcement) {
+    int count = 0;
+    for (var item in widget.listAnnouncements) {
+      if (item.nameGame == announcement.nameGame) {
+        count++;
+      }
+    }
+    return count;
   }
 
   @override
   Widget build(BuildContext context) {
-    print(listAnnouncements);
     return SizedBox(
-      height: size.height * 0.25,
-      width: size.width / 1.5,
+      height: widget.size.height * 0.25,
+      width: widget.size.width / 1.5,
       child: ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(width: 15),
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: listAnnouncements.length,
+        itemCount: widget.listUnicAnnouncements.length,
         itemBuilder: (context, index) => Stack(
           children: [
             ShaderMask(
@@ -74,7 +92,7 @@ class ListGamesAdWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      listAnnouncements[index].nameGame,
+                      widget.listUnicAnnouncements[index].nameGame,
                       style: GoogleFonts.inter(
                         fontSize: 12,
                         color: AppColors.white,
@@ -82,7 +100,7 @@ class ListGamesAdWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${_numAnnouncements(index)} anuncio(s)",
+                      "${_numAnnouncements(widget.listUnicAnnouncements[index])} announcement(s)",
                       style: GoogleFonts.inter(
                         fontSize: 10,
                         color: Colors.grey,

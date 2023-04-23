@@ -29,10 +29,9 @@ class AnnouncementModel {
       nickname: json['nickname'],
       yearsPlayed: json['yearsPlayed'],
       idDiscord: json['idDiscord'],
+      daysPlayed: json['daysPlayed'].cast<int>(),
       startTime: json['startTime'],
       endTime: json['endTime'],
-      daysPlayed: json['daysPlayed']
-          .cast<int>(), // converter a lista de dynamic para List<int>
       hasVoiceChat: json['hasVoiceChat'],
     );
   }
@@ -44,9 +43,9 @@ class AnnouncementModel {
       'nameGame': nameGame,
       'nickname': nickname,
       'yearsPlayed': yearsPlayed,
-      'idDiscord': idDiscord,
       'startTime': startTime,
       'endTime': endTime,
+      'idDiscord': idDiscord,
       'daysPlayed': daysPlayed,
       'hasVoiceChat': hasVoiceChat,
     };

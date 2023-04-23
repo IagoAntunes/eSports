@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<GameModel> listGames = [];
   List<AnnouncementModel> listAnnouncements = [];
+  List<AnnouncementModel> listUnicos = [];
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late StreamSubscription listener;
   @override
@@ -47,9 +48,16 @@ class _HomePageState extends State<HomePage> {
   getAll() async {
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await firestore.collection('announcements').get();
-
+    listAnnouncements = [];
+    listUnicos = [];
     for (var game in snapshot.docs) {
-      listAnnouncements.add(AnnouncementModel.fromJson(game.data()));
+      AnnouncementModel announcement = AnnouncementModel.fromJson(game.data());
+      if (listAnnouncements
+          .any((item) => item.nameGame == announcement.nameGame)) {
+      } else {
+        listUnicos.add(announcement);
+      }
+      listAnnouncements.add(announcement);
     }
     setState(() {});
   }
@@ -80,6 +88,7 @@ class _HomePageState extends State<HomePage> {
                   size: size,
                   listAnnouncements: listAnnouncements,
                   listGames: listGames,
+                  listUnicAnnouncements: listUnicos,
                 ),
                 SizedBox(height: size.height * 0.05),
                 CardInfoWidget(size: size, listGames: listGames)

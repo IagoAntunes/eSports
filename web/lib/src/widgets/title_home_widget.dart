@@ -16,7 +16,7 @@ class TitleHomeWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Seu",
+          "Your",
           style: AppTypography.titleStyle(),
         ),
         GradientText(
@@ -29,7 +29,7 @@ class TitleHomeWidget extends StatelessWidget {
           ]),
         ),
         Text(
-          "está aqui",
+          "is here",
           style: AppTypography.titleStyle(),
         ),
       ],
