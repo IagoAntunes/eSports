@@ -28,7 +28,7 @@
 - [x] Announcement creation[WEB],
 - [x] View list adannouncements[WEB/MOBILE]
 - [x] View announcements details[MOBILE]
-- [x] Dntuitive design
+- [x] Intuitive design
 
 ---
 
